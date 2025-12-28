@@ -1,0 +1,16 @@
+# Partir de la imagen Python 3.11 slim
+FROM python:3.11-slim
+
+# Establecer el directorio de trabajo
+WORKDIR /app
+
+# Instalar los paquetes necesarios
+# --no-cache-dir evita guardar archivos temporales y reduce el tamaño de la imagen
+RUN pip install --no-cache-dir jupyter numpy numba
+
+# Copiar el notebook al contenedor
+COPY reduc-operation-array-usuario01.ipynb /app/
+
+# Comando por defecto al ejecutar el contenedor
+# Ejecuta el notebook con ipython pasando 10**5 como argumento
+CMD ["ipython", "/app/reduc-operation-array-usuario01.ipynb", "10**5"]
